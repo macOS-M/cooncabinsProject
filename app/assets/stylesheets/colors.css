@@ -1,0 +1,39 @@
+.header {
+    background-color:#2e8b57;
+}
+.dropbutton{
+    background-color: #4d4d4d !important;
+}
+.primary{
+    color: #4d4d4d !important;
+}
+
+.secondary{
+    color: #4d4d4d !important;
+}
+
+.forest{
+    color:#2e8b57 !important;
+}
+
+.brown{
+    color: #8b5e3c !important;
+}
+.lightc{
+    color: #f5f5dc;
+}
+body {
+    padding-top: 60px;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+
+  
+  .dancing-script-op {
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }

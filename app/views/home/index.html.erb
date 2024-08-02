@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <section class="parallax bg1">
+      <div class="content">
+        <h1 class="dancing-script-op paratext">Welcome to Cozy Coon Cabins</h1>
+      </div>
+    </section>
+    
+    <section class="text-image">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Work Anywhere</h2>
+            <p>Experience the freedom to work from any location. Our hotel provides the perfect blend of comfort and connectivity, so you can stay productive while enjoying a change of scenery</p>
+          </div>
+          <div class="col-md-6">
+            <%= image_tag("work.png") %>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="parallax bg2">
+      <div class="content">
+      
+      </div>
+    </section>
+    
+    <section class="image-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ps-5">
+            <%= image_tag("celebrate.png")%>
+          </div>
+          <div class="col-md-6">
+            <h2>Celebrate</h2>
+            <p>Make every occasion unforgettable with our tailored celebration packages. Whether it's a birthday, anniversary, or special event, we offer exceptional service and amenities to make your celebration truly memorable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="parallax bg3">
+      <div class="content">
+        
+      </div>
+    </section>
+    
+    <section class="text-image">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Get a Well Deserved Rest</h2>
+            <p>Unwind and recharge in our serene accommodations. Our cozy rooms and relaxing atmosphere ensure you get the restful sleep you deserve after a long day of travel or work.</p>
+          </div>
+          <div class="col-md-6">
+            <%= image_tag("rest.png")%>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+<style>
+
+.paratext{
+    -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #FBFAF5;
+}
+body {
+  
+  font-family: Arial, sans-serif;
+}
+
+.parallax {
+  position: relative;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  height: 400px; /* Adjust height as needed */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg1 {
+  background-image: url('https://images3.alphacoders.com/568/568877.jpg');
+}
+
+.bg2 {
+  background-image: url('https://papers.co/wallpaper/papers.co-nd09-vacation-sunset-beach-happy-36-3840x2400-4k-wallpaper.jpg');
+}
+
+.bg3 {
+  background-image: url('https://i.pinimg.com/originals/d2/64/ab/d264abfb29f8ce36bd389720b95d1fe6.jpg');
+}
+
+.content {
+  text-align: center;
+}
+
+.text-image, .image-text {
+  padding: 50px 0;
+}
+
+.text-image img, .image-text img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.image-text {
+  background-color: #f8f9fa;
+}
+
+.text-image .col-md-6:nth-child(odd) {
+  order: 1;
+}
+
+.image-text .col-md-6:nth-child(odd) {
+  order: 2;
+}
+</style>
+

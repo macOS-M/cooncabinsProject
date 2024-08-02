@@ -1,0 +1,114 @@
+
+    
+    <section class="login-form">
+    <%= image_tag("racoonbg.png", class: "background-image") %>
+    <%= image_tag("login2.jpeg",class:"background-image2")%>
+
+      <div class="container marginbot">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+          
+            <div class="form-container">
+            
+              <h2 class="text-center">Login</h2>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <div class="form-group">
+            
+                  <%= f.label :email , class: "form-label"%>
+                   <%= f.email_field :email, autofocus: true, class: "form-control",autocomplete: "email" %>
+                </div>
+                <div class="form-group">
+
+                   <%= f.label :password, class: "form-label" %><br />
+               <%= f.password_field :password, autocomplete: "current-password", class: "form-control"%>
+                  
+                </div>
+                <div class="flex items-center justify-between py-3">
+          <% if devise_mapping.rememberable? %>
+          <div class="flex items-center">
+           <%= f.check_box :remember_me, class:"h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" %>
+            <%= f.label :remember_me, class:"ml-3 block text-sm leading-6 text-gray-900"%>
+          </div>
+           <% end %>
+                <div class="form-group text-center">
+
+                      <%= f.submit "Log in", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+              
+            </div>
+            <p class="mt-10 text-center text-sm text-gray-500">
+      Not a member? lol
+
+      <%= link_to "Sign up", new_registration_path(resource_name), class:"text-primary font-semibold leading-6  hover:text-primary-dark"%>
+
+    </p>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </div>
+
+<style>
+
+
+.content {
+  text-align: center;
+}
+
+.login-form {
+  padding: 50px 0;
+}
+
+.form-container {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+.background-image {
+  position: absolute; /* To place it behind content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+  z-index: -1; /* Ensures it stays behind content */
+}
+.background-image2 {
+  position: absolute; /* To place it behind content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container */
+  z-index: -2; /* Ensures it stays behind content */
+}
+.marginbot{
+  margin-bottom: 200px;
+}
+
+</style>
