@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @cabin %>
+
+<div>
+  <%= link_to "Edit this cabin", edit_cabin_path(@cabin) %> |
+  <%= link_to "Back to cabins", cabins_path %>
+
+  <%= button_to "Destroy this cabin", @cabin, method: :delete %>
+</div>

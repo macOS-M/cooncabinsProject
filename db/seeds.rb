@@ -7,3 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+5.times do |i|
+    cabin = Cabin.create({
+        name: "Name",
+        description: "description",
+        price: 9.99
+    })
+    cabin.images.attach(io: File.open("db/images/property#{i+1}.jpg"),filename: cabin.name)
+    
+end
