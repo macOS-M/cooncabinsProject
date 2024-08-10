@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :cabins do
     post 'create_review', on: :member
+    resources :reviews, only: [:create, :destroy] # Add :destroy to allow review deletion
   end
+
   devise_for :users
   get 'home/index'
   get 'home/cabins'
