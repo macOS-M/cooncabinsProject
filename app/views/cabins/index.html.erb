@@ -1,0 +1,56 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Cabins</h1>
+
+<%= link_to "New cabin", new_cabin_path %>
+
+<section class="diagonal section-bg1">
+  <div class="container diagonal-content">
+    <% @cabins.each do |cabin| %>
+      <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+          <h2><%= cabin.name %></h2>
+          <p><%= cabin.description %></p>
+          <p><strong>Price:</strong> $<%= cabin.price %></p>
+          <p>
+            <%= link_to "Show this cabin", cabin, class: "btn btn-primary" %>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <% if cabin.images.attached? %>
+          <div class="swiper">
+          <!-- Additional required wrapper -->
+         <div class="swiper-wrapper">
+            <% cabin.images.each do |image| %>
+              <%= image_tag image, class: "swiper-slide img-fluid mx-auto d-block rounded img-test"  %>
+            <% end %>
+              <!-- Slider main container -->
+
+
+
+    ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+            
+          <% else %>
+            <img src="https://via.placeholder.com/500" alt="Placeholder Image" class="img-fluid">
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+
+<style>
+
+</style>
