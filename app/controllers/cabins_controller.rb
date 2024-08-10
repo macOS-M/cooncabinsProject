@@ -8,7 +8,10 @@ class CabinsController < ApplicationController
 
   # GET /cabins/1 or /cabins/1.json
   def show
+    @cabin = Cabin.find(params[:id])
+    @review = Review.new
   end
+
 
   # GET /cabins/new
   def new
@@ -56,6 +59,25 @@ class CabinsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def create_review
+    @cabin = Cabin.find_by(id: params[:id])
+    
+    if @cabin.nil?
+      flash[:alert] = "Cabin not found."
+      redirect_to cabins_path
+      return
+    end
+
+    @review = @cabin.reviews.build(review_params)
+    @review.user = current_user
+
+    if @review.save
+      redirect_to @cabin, notice: "Review submitted successfully."
+    else
+      flash.now[:alert] = "There was a problem submitting your review."
+      render :show
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -67,4 +89,8 @@ class CabinsController < ApplicationController
     def cabin_params
       params.require(:cabin).permit(:name, :description, :price, :image)
     end
+    def review_params
+      params.require(:review).permit(:rating, :comment)
+    end
 end
+
