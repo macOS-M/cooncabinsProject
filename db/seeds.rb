@@ -14,5 +14,6 @@
         price: 9.99
     })
     cabin.images.attach(io: File.open("db/images/property#{i+1}.jpg"),filename: cabin.name)
+    cabin.images.attach(io: File.open("db/images/property#{i+7}.jpg"),filename: cabin.name)
     
 end
