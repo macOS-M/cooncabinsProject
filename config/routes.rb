@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :cabins
+  resources :cabins do
+    post 'create_review', on: :member
+  end
   devise_for :users
   get 'home/index'
   get 'home/cabins'
@@ -13,5 +15,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
- 
 end
