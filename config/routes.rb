@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  resources :cabins do
+    post 'create_review', on: :member
+    resources :reviews, only: [:create, :destroy] # Add :destroy to allow review deletion
+  end
+
   devise_for :users
   get 'home/index'
+  get 'home/cabins'
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -11,5 +17,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
- 
 end

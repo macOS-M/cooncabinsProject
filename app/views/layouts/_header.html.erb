@@ -1,4 +1,5 @@
 
+
 <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
   <div class="container">
 <%= link_to root_path do%>  <svg class="primary" version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +39,7 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
 </g>
 </svg> <%end%> 
 <div class='mt-2'>
-<h1 class='dancing-script-op'>Cozy Coon Cabins</h1>
+<h1 class='dancing-script-op text-deco'>Cozy Coon Cabins</h1>
 </div>
     <button
       class="navbar-toggler"
@@ -54,8 +55,11 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
-         <i class="fa-solid fa-binoculars pe-2"></i>Explore
+        <%= link_to cabins_path, class: "nav-link" do %>
+          <i class="fa-solid fa-binoculars pe-2"></i>Explore
+        <% end %>
         </li>
+
         <li class="nav-item">
           <a class="nav-link mx-2" href="#!"><i class="fas fa-bell pe-2"></i>Alerts</a>
         </li>
@@ -63,16 +67,22 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
           <a class="nav-link mx-2" href="#!"><i class="fas fa-heart pe-2"></i>Trips</a>
         </li>
         <% if user_signed_in? %>
-        <li class="nav-item ">
-       
-          <%= link_to "Log Out", destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-link" %>
+        <li class="nav-item">
+        <%= link_to destroy_user_session_path, data: { "turbo-method": :delete }, class: "nav-link" do %>
+          <i class="fa-solid fa-sign-out-alt pe-2"></i>Log Out
+          <% end %>
         </li>
+
         <%else%>
-        <li class="nav-item ">
-             <%=link_to "Log in", new_user_session_path, class: "nav-link" %>
+        <li class="nav-item">
+        <%= link_to new_user_session_path, class: "nav-link" do %>
+          <i class="fa-solid fa-sign-in-alt pe-2"></i>Log in
+          <% end %>
         </li>
+
         <%end%>
       </ul>
     </div>
   </div>
 </nav>
+
