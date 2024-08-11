@@ -9,7 +9,7 @@
     <% @cabins.each do |cabin| %>
       <div class="row align-items-center mb-5">
         <div class="col-md-6">
-          <h2><%= cabin.name %></h2>
+          <h2><%= cabin.name %> <%= cabin.average_rating %>/5⭐</h2>
           <p><%= cabin.description %></p>
           <p><strong>Price:</strong> $<%= cabin.price %></p>
           <p>
