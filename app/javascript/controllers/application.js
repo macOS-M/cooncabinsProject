@@ -8,16 +8,14 @@ window.Stimulus   = application
 
 export { application }
 
-const swiper = new Swiper('.swiper', {
-    // Optional parameters
 
+document.addEventListener("turbo:load", function() {
+  const swiper = new Swiper('.swiper', { 
     loop: true,
-  
-  
-    // Navigation arrows
+
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     }
-  
   });
+});
