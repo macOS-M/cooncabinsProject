@@ -1,5 +1,6 @@
 class CabinsController < ApplicationController
-  before_action :set_cabin, only: %i[ show edit update destroy ]
+  before_action :set_cabin, only: %i[show edit update destroy]
+  before_action :authorize_admin!, only: %i[edit update destroy]
 
   # GET /cabins or /cabins.json
   def index
@@ -91,6 +92,12 @@ class CabinsController < ApplicationController
     end
     def review_params
       params.require(:review).permit(:rating, :comment)
+    end
+    def authorize_admin!
+      unless current_user.admin?
+        flash[:alert] = "You are not authorized to perform this action."
+        redirect_to cabins_path
+      end
     end
 end
 

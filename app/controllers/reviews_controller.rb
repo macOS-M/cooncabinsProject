@@ -2,6 +2,9 @@
 
 class ReviewsController < ApplicationController
     before_action :set_cabin
+
+    before_action :set_review, only: [:destroy]
+    before_action :authorize_user!, only: [:destroy]
   
     def create
       @review = @cabin.reviews.build(review_params)
@@ -29,5 +32,10 @@ class ReviewsController < ApplicationController
     def review_params
       params.require(:review).permit(:rating, :comment)
     end
+    def authorize_user!
+      unless @review.user == current_user || current_user.admin?
+        flash[:alert] = "You are not authorized to delete this review."
+        redirect_to @review.cabin
+      end
   end
   
