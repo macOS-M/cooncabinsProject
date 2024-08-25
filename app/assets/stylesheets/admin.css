@@ -13,7 +13,7 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    padding: 58px 0 0; /* Height of navbar */
+    padding: 15px 0 0; /* Height of navbar */
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
     width: 240px;
     z-index: 1;
@@ -36,4 +36,15 @@ body {
     padding-top: 0.5rem;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  }
+  .list-group-item {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  
+  .list-group-item.active {
+    background-color: #007bff; /* Example active background color */
+    color: white;
+  }
+  html {
+    scroll-behavior: smooth;
   }

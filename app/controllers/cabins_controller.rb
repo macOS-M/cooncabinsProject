@@ -11,6 +11,8 @@ class CabinsController < ApplicationController
   def show
     @cabin = Cabin.find(params[:id])
     @review = Review.new
+
+    CabinView.create(cabin: @cabin, user: current_user)
   end
 
 
@@ -88,7 +90,7 @@ class CabinsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cabin_params
-      params.require(:cabin).permit(:name, :description, :price, :image)
+      params.require(:cabin).permit(:name, :description, :price, images: [])
     end
     def review_params
       params.require(:review).permit(:rating, :comment)

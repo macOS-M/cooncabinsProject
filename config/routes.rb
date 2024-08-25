@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
+    get 'dashboard/analytics', to: 'dashboard#analytics'
   end
   
   resources :cabins do
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'home/index'
   get 'home/cabins'
+  
   root 'home#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

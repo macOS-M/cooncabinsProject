@@ -38,4 +38,5 @@ class ReviewsController < ApplicationController
         redirect_to @review.cabin
       end
   end
+end
   

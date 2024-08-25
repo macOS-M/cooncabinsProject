@@ -6,6 +6,8 @@ class Admin::DashboardController < ApplicationController
 
   def index
     @cabins = Cabin.all
+    @users = User.group_by_day(:created_at).count
+    
   end
 
   private

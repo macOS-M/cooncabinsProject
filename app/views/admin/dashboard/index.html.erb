@@ -1,4 +1,10 @@
-<h1>Admin::Dashboard#index</h1>
-<p>Find me in app/views/admin/dashboard/index.html.erb</p>
 
-<p>cabins: <%= @cabins.inspect %></p>
+Total Sales, Total Bookings, Current occupancy rate.
+Quick links
+<%= line_chart User.group_by_day(:created_at).count, xtitle:"Date", ytitle: "Users", title: "Users Registered" %>
+<%= line_chart CabinView.joins(:cabin).group('cabins.name').group_by_day(:created_at).count, 
+               xtitle: "Date", ytitle: "Views", title: "Cabin Popularity" %>
+<%= pie_chart CabinView.joins(:cabin)
+               .group('cabins.name')
+               .count, 
+               title: "Cabin Popularity" %>

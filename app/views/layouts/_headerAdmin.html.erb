@@ -43,22 +43,21 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
 </g>
 </svg>
 
-        <a
-          href="#"
-          class="list-group-item list-group-item-action py-2 ripple active"
-          aria-current="true"
-        >
-          <i class="fas fa-tachometer-alt fa-fw me-3 "></i><span>Main dashboard</span>
-        </a>
+        <%= link_to admin_dashboard_path, class: "list-group-item list-group-item-action py-2 ripple " do %>
+        <i class="fas fa-tachometer-alt fa-fw me-3"></i>
+        <span> Main Dashboard </span>
+        <% end %>
         <a href="#" class="list-group-item list-group-item-action py-2 ripple">
           <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste traffic</span>
         </a>
         <a href="#" class="list-group-item list-group-item-action py-2 ripple"
           ><i class="fas fa-lock fa-fw me-3"></i><span>Password</span></a
         >
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span></a
-        >
+        <%= link_to admin_dashboard_analytics_path, class: "list-group-item list-group-item-action py-2 ripple"  do %>
+        <i class="fas fa-chart-line fa-fw me-3"></i>
+        <span>Analytics</span>
+        <% end %>
+
         <a href="#" class="list-group-item list-group-item-action py-2 ripple">
           <i class="fas fa-chart-pie fa-fw me-3"></i><span>SEO</span>
         </a>
@@ -80,6 +79,9 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
         <a href="#" class="list-group-item list-group-item-action py-2 ripple"
           ><i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a
         >
+        <%= link_to destroy_user_session_path, method: :delete, class: "list-group-item list-group-item-action py-2 ripple" do %>
+        <i class="fa-solid fa-sign-out-alt pe-2"></i> Log out
+          <% end %>
       </div>
     </div>
   </nav>
@@ -116,16 +118,23 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
 </header>
 
 <script> 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
   const sidebarItems = document.querySelectorAll('#sidebarMenu .list-group-item');
-
+  const currentPath = window.location.pathname;
   sidebarItems.forEach(item => {
+    const itemPath = item.getAttribute('href');
+    if (currentPath === itemPath) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+
     item.addEventListener('click', function(e) {
-      e.preventDefault();
-      sidebarItems.forEach(i => i.classList.remove('active')); 
-      this.classList.add('active'); 
+      sidebarItems.forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
     });
   });
 });
+
 
 </script>
