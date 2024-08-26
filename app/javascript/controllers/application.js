@@ -1,4 +1,7 @@
-import { Application } from "@hotwired/stimulus"
+import { Application } from "@hotwired/stimulus";
+
+
+
 
 const application = Application.start()
 
@@ -8,16 +11,19 @@ window.Stimulus   = application
 
 export { application }
 
-const swiper = new Swiper('.swiper', {
-    // Optional parameters
-
+document.addEventListener('turbo:load', function() {
+  const swiper = new Swiper('.swiper', { 
     loop: true,
-  
-  
-    // Navigation arrows
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
-    }
-  
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
   });
+});

@@ -1,0 +1,6 @@
+<%= line_chart CabinView.joins(:cabin).group('cabins.name').group_by_day(:created_at).count, 
+               xtitle: "Date", ytitle: "Views", title: "Cabin Popularity" %>
+<%= pie_chart CabinView.joins(:cabin)
+               .group('cabins.name')
+               .count, 
+               title: "Cabin Popularity" %>

@@ -1,8 +1,7 @@
-<%= form_with(model: cabin) do |form| %>
+<%= form_with(model: cabin, local: true) do |form| %>
   <% if cabin.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(cabin.errors.count, "error") %> prohibited this cabin from being saved:</h2>
-
       <ul>
         <% cabin.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -26,6 +25,10 @@
     <%= form.text_field :price %>
   </div>
 
+  <div>
+    <%= form.label :images, "Upload Images", style: "display: block" %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
 
   <div>
     <%= form.submit %>
