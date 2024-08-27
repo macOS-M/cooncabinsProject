@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_23_014322) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_27_003432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_23_014322) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "cabin_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "total_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cabin_id"], name: "index_bookings_on_cabin_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
   create_table "cabin_views", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "cabin_id", null: false
@@ -67,6 +79,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_23_014322) do
     t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "available_dates", default: {}
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -95,6 +108,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_23_014322) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "cabins"
+  add_foreign_key "bookings", "users"
   add_foreign_key "cabin_views", "cabins"
   add_foreign_key "cabin_views", "users"
   add_foreign_key "reviews", "cabins"

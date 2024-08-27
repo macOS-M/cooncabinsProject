@@ -2,6 +2,7 @@
   "dependencies": {
     "chart.js": "^4.4.4",
     "chartkick": "^5.0.1",
+    "flatpickr": "^4.6.13",
     "swiper": "^11.1.10"
   }
 }

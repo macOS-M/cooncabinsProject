@@ -11,10 +11,11 @@ class CabinsController < ApplicationController
   def show
     @cabin = Cabin.find(params[:id])
     @review = Review.new
-
+    @booking = @cabin.bookings.new
     CabinView.create(cabin: @cabin, user: current_user)
+    @available_dates = calculate_available_dates(@cabin.bookings.pluck(:start_date, :end_date))
+    @booked_dates = booked_dates(@cabin.bookings)
   end
-
 
   # GET /cabins/new
   def new
@@ -62,6 +63,7 @@ class CabinsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def create_review
     @cabin = Cabin.find_by(id: params[:id])
     
@@ -83,23 +85,54 @@ class CabinsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cabin
-      @cabin = Cabin.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def cabin_params
-      params.require(:cabin).permit(:name, :description, :price, images: [])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cabin
+    @cabin = Cabin.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def cabin_params
+    params.require(:cabin).permit(:name, :description, :price, images: [])
+  end
+
+  def review_params
+    params.require(:review).permit(:rating, :comment)
+  end
+
+  def authorize_admin!
+    unless current_user.admin?
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_to cabins_path
     end
-    def review_params
-      params.require(:review).permit(:rating, :comment)
+  end
+
+  def booked_dates(bookings)
+    booked_dates = []
+    bookings.each do |booking|
+      booked_dates.concat(date_range_to_dates(booking.start_date, booking.end_date))
     end
-    def authorize_admin!
-      unless current_user.admin?
-        flash[:alert] = "You are not authorized to perform this action."
-        redirect_to cabins_path
-      end
-    end
+    booked_dates
+  end
+
+  def date_range_to_dates(start_date, end_date)
+    return [] if start_date.nil? || end_date.nil? || start_date > end_date
+  
+    (start_date..end_date).to_a.map { |date| date.strftime('%Y-%m-%d') }
+  end
+  
+
+  def calculate_available_dates(bookings_dates)
+    # Define the range you want to check for availability (e.g., next 6 months)
+    start_date = Date.today
+    end_date = start_date + 6.months
+  
+    # Generate all dates in the defined range
+    all_dates = (start_date..end_date).to_a.map { |date| date.strftime('%Y-%m-%d') }
+  
+    # Filter out booked dates
+    available_dates = all_dates - bookings_dates
+  
+    available_dates
+  end
 end
-

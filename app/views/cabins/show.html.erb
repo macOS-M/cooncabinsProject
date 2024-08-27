@@ -1,5 +1,3 @@
-<!-- app/views/cabins/show.html.erb -->
-
 <p class="text-success"><%= notice %></p>
 
 <div class="container mt-4">
@@ -26,12 +24,32 @@
         <%= button_to "Destroy this cabin", @cabin, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
       </div>
 
+      <!-- Booking Form -->
+<%= form_with(model: [@cabin, @booking], local: true, id: "booking-form") do |f| %>
+  <div class="form-group mb-3">
+    <%= f.label :start_date, "Start Date" %>
+    <%= f.date_field :start_date, class: 'form-control' %>
+  </div>
+
+  <div class="form-group mb-3">
+    <%= f.label :end_date, "End Date" %>
+    <%= f.date_field :end_date, class: 'form-control' %>
+  </div>
+
+  <%= f.hidden_field :total_price, id: "total-price" %> <!-- Hidden field for total price -->
+
+  <%= f.submit "Book Now", class: 'btn btn-primary' %>
+<% end %>
+
+
+
+      <!-- Reviews Form -->
       <%= form_with model: [@cabin, @review], url: cabin_reviews_path(@cabin), local: true do |f| %>
         <div class="form-group mb-3">
           <label>Select Rating:</label>
           <div class="d-flex flex-wrap">
             <%= f.radio_button :rating, 1, id: 'rating_1', class: 'form-check-input' %>
-            <%= image_tag 'scream.png', alt: 'scream (worst)', class: 'form-check-label mr-2 '  %>
+            <%= image_tag 'scream.png', alt: 'scream (worst)', class: 'form-check-label mr-2' %>
 
             <%= f.radio_button :rating, 2, id: 'rating_2', class: 'form-check-input' %>
             <%= image_tag 'cry.png', alt: 'cry', class: 'form-check-label mr-2' %>
@@ -44,8 +62,6 @@
 
             <%= f.radio_button :rating, 5, id: 'rating_5', class: 'form-check-input' %>
             <%= image_tag 'love.png', alt: 'love', class: 'form-check-label mr-2' %>
-
-           
           </div>
         </div>
 
@@ -57,6 +73,7 @@
         <%= f.submit "Submit Review", class: 'btn btn-primary' %>
       <% end %>
 
+      <!-- Reviews Section -->
       <h3 class="mt-4">Reviews:</h3>
       <% if @cabin.reviews.any? %>
         <% @cabin.reviews.each do |review| %>
@@ -81,3 +98,70 @@
     </div>
   </div>
 </div>
+
+
+<script>
+document.addEventListener("turbo:load", function() {
+  const bookedDates = <%= raw @booked_dates.to_json %>; // Pass booked dates from Rails
+  const dateFormat = "Y-m-d";
+
+  function formatDate(date) {
+    return date.toISOString().split('T')[0];
+  }
+
+  function isBooked(date) {
+    return bookedDates.includes(formatDate(date));
+  }
+
+  flatpickr("#booking_start_date", {
+    minDate: "today",
+    dateFormat: dateFormat,
+    disable: [
+      function(date) {
+        return isBooked(date);
+      }
+    ],
+    onChange: function(selectedDates) {
+      const startDate = selectedDates[0];
+      if (startDate) {
+        const endDate = document.querySelector("#booking_end_date").value;
+        calculateTotalPrice(startDate, endDate);
+      }
+    }
+  });
+
+  flatpickr("#booking_end_date", {
+    minDate: "today",
+    dateFormat: dateFormat,
+    disable: [
+      function(date) {
+        return isBooked(date);
+      }
+    ],
+    onChange: function(selectedDates) {
+      const endDate = selectedDates[0];
+      const startDate = document.querySelector("#booking_start_date").value;
+      if (startDate && endDate) {
+        calculateTotalPrice(new Date(startDate), endDate);
+      }
+    }
+  });
+
+  function calculateTotalPrice(startDate, endDate) {
+    const pricePerNight = parseFloat("<%= @cabin.price %>");
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (start && end && end >= start) {
+      const days = (end - start) / (1000 * 60 * 60 * 24) + 1;
+      const totalPrice = days * pricePerNight;
+      document.querySelector("#total-price").value = totalPrice.toFixed(2);
+    } else {
+      document.querySelector("#total-price").value = "";
+    }
+  }
+});
+
+
+</script>
+

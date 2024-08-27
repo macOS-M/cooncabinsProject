@@ -8,3 +8,19 @@ Quick links
                .group('cabins.name')
                .count, 
                title: "Cabin Popularity" %>
+
+               <!-- app/views/admin/dashboard/index.html.erb -->
+<h2>Income Over Time</h2>
+
+<%= line_chart @income_by_day, xtitle: "Date", ytitle: "Total Income", colors: ["#00838f"] %>
+
+<!-- Optional: Add another chart for monthly income -->
+<h3>Monthly Income</h3>
+<%= column_chart @income_by_month, xtitle: "Month", ytitle: "Total Income", colors: ["#00838f"] %>
+
+  <div class="row mt-5">
+    <div class="col-md-12">
+      <h2>Bookings by Cabin</h2>
+      <%= pie_chart @bookings_by_cabin, colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFBD33"] %>
+    </div>
+  </div>

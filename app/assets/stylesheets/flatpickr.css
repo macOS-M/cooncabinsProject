@@ -1,0 +1,30 @@
+/* Style for enabled dates */
+.flatpickr-day {
+    background-color: #e0f7fa; 
+    color: #006064; 
+}
+
+/* Style for enabled dates on hover */
+.flatpickr-day:hover {
+    background-color: #b2ebf2; 
+    color: #004d40;
+}
+
+/* Style for selected dates */
+.flatpickr-day.selected {
+    background-color: #00838f; 
+    color: #ffffff; 
+}
+
+/* Style for disabled dates */
+.flatpickr-day.flatpickr-disabled {
+    background-color: #f5c6cb; 
+    color: #721c24; 
+    cursor: not-allowed; 
+    opacity: 1; 
+}
+
+/* disabled dates border  */
+.flatpickr-day.flatpickr-disabled:hover {
+    border: 1px solid #721c24; 
+}
