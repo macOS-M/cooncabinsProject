@@ -1,0 +1,10 @@
+<div class="container mt-4">
+  <h1>User Details</h1>
+
+  <p><strong>ID:</strong> <%= @user.id %></p>
+  <p><strong>Email:</strong> <%= @user.email %></p>
+  <p><strong>Admin:</strong> <%= @user.admin ? 'Yes' : 'No' %></p>
+
+  <%= link_to 'Edit', edit_admin_user_path(@user), class: 'btn btn-primary' %>
+  <%= link_to 'Back', admin_dashboard_users_path, class: 'btn btn-secondary' %>
+</div>

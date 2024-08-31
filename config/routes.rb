@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
     get 'dashboard/analytics', to: 'dashboard#analytics'
+    get 'dashboard/users', to: 'dashboard#users'
+    resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
   end
   
   resources :cabins do
