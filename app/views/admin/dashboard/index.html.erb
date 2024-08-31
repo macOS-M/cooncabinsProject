@@ -24,3 +24,11 @@ Quick links
       <%= pie_chart @bookings_by_cabin, colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFBD33"] %>
     </div>
   </div>
+   <div class="mb-4">
+    <h3>Income per Cabin</h3>
+    <%= bar_chart @income_per_cabin, 
+                colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A5", "#FFBD33", "#33FFF7"],
+                xtitle: "Income (USD)", 
+                ytitle: "Cabins",
+                height: "400px" %>
+  </div>

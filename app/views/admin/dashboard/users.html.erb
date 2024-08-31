@@ -1,0 +1,41 @@
+<!-- app/views/admin/dashboard/users.html.erb -->
+<div class="container mt-4">
+  <h1>All Users</h1>
+
+  <div class="mb-3">
+    <%= link_to 'Create User', new_admin_user_path, class: 'btn btn-success' %>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @users.present? %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= user.email %></td>
+            <td><%= user.admin ? 'Yes' : 'No' %></td>
+            <td class="text-center">
+              <div class="btn-group" role="group" aria-label="User Actions">
+                <%= link_to 'Show', admin_user_path(user), class: 'btn btn-info btn-sm me-2' %>
+                <%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-primary btn-sm me-2' %>
+                <%= button_to 'Destroy', admin_user_path(user), method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: 'Are you sure?' } %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="text-center">No users found.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
