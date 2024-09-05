@@ -1,5 +1,5 @@
 class Cabin < ApplicationRecord
-    has_many_attached :images, dependent :destroy
+    has_many_attached :images, dependent: :destroy
     has_many :reviews, dependent: :destroy
     has_many :cabin_views, dependent: :destroy
     has_many :bookings, dependent: :destroy

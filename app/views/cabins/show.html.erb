@@ -4,14 +4,23 @@
   <h1 class="mb-4"><%= @cabin.name %></h1>
 
   <div class="row">
-    <!-- Cabin Image -->
+    <!-- Cabin Image Carousel -->
     <% if @cabin.images.attached? %>
       <div class="col-md-6 mb-4">
-        <% @cabin.images.each do |image| %>
-          <div class="cabin-image">
-            <%= image_tag image, class: 'img-fluid', alt: "Cabin Image" %>
+        <div class="swiper">
+          <div class="swiper-wrapper">
+            <% @cabin.images.each do |image| %>
+              <div class="swiper-slide">
+                <%= image_tag image, class: 'swiper-slide img-fluid mx-auto d-block rounded', alt: "Cabin Image" %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
+          <!-- Add Pagination -->
+          <div class="swiper-pagination"></div>
+          <!-- Add Navigation -->
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
       </div>
     <% end %>
 
@@ -25,23 +34,21 @@
       </div>
 
       <!-- Booking Form -->
-<%= form_with(model: [@cabin, @booking], local: true, id: "booking-form") do |f| %>
-  <div class="form-group mb-3">
-    <%= f.label :start_date, "Start Date" %>
-    <%= f.date_field :start_date, class: 'form-control' %>
-  </div>
+      <%= form_with(model: [@cabin, @booking], local: true, id: "booking-form") do |f| %>
+        <div class="form-group mb-3">
+          <%= f.label :start_date, "Start Date" %>
+          <%= f.date_field :start_date, class: 'form-control' %>
+        </div>
 
-  <div class="form-group mb-3">
-    <%= f.label :end_date, "End Date" %>
-    <%= f.date_field :end_date, class: 'form-control' %>
-  </div>
+        <div class="form-group mb-3">
+          <%= f.label :end_date, "End Date" %>
+          <%= f.date_field :end_date, class: 'form-control' %>
+        </div>
 
-  <%= f.hidden_field :total_price, id: "total-price" %> 
+        <%= f.hidden_field :total_price, id: "total-price" %> 
 
-  <%= f.submit "Book Now", class: 'btn btn-primary' %>
-<% end %>
-
-
+        <%= f.submit "Book Now", class: 'btn btn-primary' %>
+      <% end %>
 
       <!-- Reviews Form -->
       <%= form_with model: [@cabin, @review], url: cabin_reviews_path(@cabin), local: true do |f| %>
@@ -98,7 +105,6 @@
     </div>
   </div>
 </div>
-
 
 <script>
 document.addEventListener("turbo:load", function() {
@@ -161,7 +167,4 @@ document.addEventListener("turbo:load", function() {
     }
   }
 });
-
-
 </script>
-

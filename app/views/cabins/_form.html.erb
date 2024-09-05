@@ -1,36 +1,41 @@
-<%= form_with(model: cabin, local: true) do |form| %>
-  <% if cabin.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(cabin.errors.count, "error") %> prohibited this cabin from being saved:</h2>
-      <ul>
-        <% cabin.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="d-flex justify-content-center">
+  <div class="col-md-6">
+    <%= form_with(model: cabin, local: true, class: "needs-validation", novalidate: true) do |form| %>
+      <% if cabin.errors.any? %>
+        <div class="alert alert-danger">
+          <h4 class="alert-heading"><%= pluralize(cabin.errors.count, "error") %> prohibited this cabin from being saved:</h4>
+          <ul>
+            <% cabin.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", required: true %>
+      </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control", rows: 5, required: true %>
+      </div>
 
-  <div>
-    <%= form.label :price, style: "display: block" %>
-    <%= form.text_field :price %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :price, class: "form-label" %>
+        <%= form.text_field :price, class: "form-control", required: true %>
+      </div>
 
-  <div>
-    <%= form.label :images, "Upload Images", style: "display: block" %>
-    <%= form.file_field :images, multiple: true %>
-  </div>
+      <div class="mb-3">
+        <%= form.label :images, "Upload Images", class: "form-label" %>
+        <%= form.file_field :images, class: "form-control", multiple: true, accept: "image/*" %>
+        <small class="form-text text-muted">You can select multiple images.</small>
+      </div>
 
-  <div>
-    <%= form.submit %>
+      <div class="text-center">
+        <%= form.submit "Save Cabin", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
