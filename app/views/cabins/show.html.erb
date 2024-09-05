@@ -36,21 +36,22 @@
 
       <!-- Booking Form -->
       <h5 >See Availability</h3>
-      <%= form_with(model: [@cabin, @booking], local: true, id: "booking-form") do |f| %>
-        <div class="form-group mb-3">
-          <%= f.label :start_date, "Start Date" %>
-          <%= f.date_field :start_date, class: 'form-control' %>
-        </div>
+      <!-- Booking Form -->
+    <%= form_with(model: [@cabin, @booking], local: true, id: "booking-form") do |f| %>
+    <div class="form-group mb-3">
+      <%= f.label :start_date, "Start Date" %>
+      <%= f.date_field :start_date, class: 'form-control' %>
+    </div>
 
-        <div class="form-group mb-3">
-          <%= f.label :end_date, "End Date" %>
-          <%= f.date_field :end_date, class: 'form-control' %>
-        </div>
+  <div class="form-group mb-3">
+    <%= f.label :end_date, "End Date" %>
+    <%= f.date_field :end_date, class: 'form-control' %>
+  </div>
 
-        <%= f.hidden_field :total_price, id: "total-price" %>
+  <%= f.hidden_field :total_price, id: "total-price-input" %> <!-- Hidden field for total price -->
 
-        <%= f.submit "Book Now", class: 'btn btn-primary' %>
-      <% end %>
+  <%= f.submit "Book Now", class: 'btn btn-primary' %>
+<% end %>
 
       <!-- Reviews Form -->
       <%= form_with model: [@cabin, @review], url: cabin_reviews_path(@cabin), local: true do |f| %>
@@ -101,35 +102,43 @@
     <% end %>
   </div>
 
-  <!-- Credit Card Modal -->
-  <div class="modal fade" id="creditCardModal" tabindex="-1" aria-labelledby="creditCardModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="creditCardModalLabel">Enter Credit Card Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+ <!-- Credit Card Modal -->
+<div class="modal fade" id="creditCardModal" tabindex="-1" aria-labelledby="creditCardModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="creditCardModalLabel">Enter Credit Card Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Display Total Price -->
+        <div class="mb-3">
+          <label for="total-price" class="form-label">Total Price</label>
+          
+          <input type="text" class="form-control" id="total-price" readonly>
+          
         </div>
-        <div class="modal-body">
-          <form id="credit-card-form">
-            <div class="mb-3">
-              <label for="credit-card-number" class="form-label">Credit Card Number</label>
-              <input type="text" class="form-control" id="credit-card-number" required>
-            </div>
-            <div class="mb-3">
-              <label for="expiration-date" class="form-label">Expiration Date</label>
-              <input type="text" class="form-control" id="expiration-date" required>
-            </div>
-            <div class="mb-3">
-              <label for="cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cvv" required>
-            </div>
-            <button type="button" class="btn btn-primary" id="confirm-payment">Confirm Payment</button>
-          </form>
-        </div>
+        <form id="credit-card-form">
+          <div class="mb-3">
+            <label for="credit-card-number" class="form-label">Credit Card Number</label>
+            <input type="text" class="form-control" id="credit-card-number" required>
+          </div>
+          <div class="mb-3">
+            <label for="expiration-date" class="form-label">Expiration Date</label>
+            <input type="text" class="form-control" id="expiration-date" required>
+          </div>
+          <div class="mb-3">
+            <label for="cvv" class="form-label">CVV</label>
+            <input type="text" class="form-control" id="cvv" required>
+          </div>
+          
+          <button type="button" class="btn btn-primary" id="confirm-payment">Confirm Payment</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <script>

@@ -1,32 +1,52 @@
+<h1>Admin Dashboard</h1>
 
-Total Sales, Total Bookings, Current occupancy rate.
-Quick links
-<%= line_chart User.group_by_day(:created_at).count, xtitle:"Date", ytitle: "Users", title: "Users Registered" %>
-<%= line_chart CabinView.joins(:cabin).group('cabins.name').group_by_day(:created_at).count, 
-               xtitle: "Date", ytitle: "Views", title: "Cabin Popularity" %>
-<%= pie_chart CabinView.joins(:cabin)
-               .group('cabins.name')
-               .count, 
-               title: "Cabin Popularity" %>
-
-<h2>Income Over Time</h2>
-
-<%= line_chart @income_by_day, xtitle: "Date", ytitle: "Total Income", colors: ["#00838f"] %>
-
-<h3>Monthly Income</h3>
-<%= column_chart @income_by_month, xtitle: "Month", ytitle: "Total Income", colors: ["#00838f"] %>
-
-  <div class="row mt-5">
-    <div class="col-md-12">
-      <h2>Bookings by Cabin</h2>
-      <%= pie_chart @bookings_by_cabin, colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFBD33"] %>
-    </div>
+<div class="dashboard-metrics">
+  <div class="metric-box">
+    <h2>Total Sales Today</h2>
+    <p>$<%= @total_sales_today %></p>
   </div>
-   <div class="mb-4">
-    <h3>Income per Cabin</h3>
-    <%= bar_chart @income_per_cabin, 
-                colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A5", "#FFBD33", "#33FFF7"],
-                xtitle: "Income (USD)", 
-                ytitle: "Cabins",
-                height: "400px" %>
+
+  <div class="metric-box">
+    <h2>Total Sales This Week</h2>
+    <p>$<%= @total_sales_week %></p>
   </div>
+
+  <div class="metric-box">
+    <h2>Total Bookings Today</h2>
+    <p><%= @total_bookings_today %></p>
+  </div>
+
+  <div class="metric-box">
+    <h2>Total Bookings This Week</h2>
+    <p><%= @total_bookings_week %></p>
+  </div>
+
+  <div class="metric-box">
+    <h2>Current Occupancy Rate</h2>
+    <p><%= @occupancy_rate %> %</p>
+  </div>
+</div>
+
+<h2>Recent Bookings</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Cabin</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @recent_bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.user.email %></td>
+        <td><%= booking.cabin.name %></td>
+        <td><%= booking.start_date %></td>
+        <td><%= booking.end_date %></td>
+        <td>$<%= booking.total_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

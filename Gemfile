@@ -46,6 +46,7 @@ gem "image_processing", "~> 1.2"
 
 gem 'chartkick', '~> 5.0'
 gem 'groupdate', '~> 6.1'
+gem 'faker', '~> 3.4', '>= 3.4.2'
 
 
 group :development, :test do

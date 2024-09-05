@@ -1,6 +1,24 @@
-<%= line_chart CabinView.joins(:cabin).group('cabins.name').group_by_day(:created_at).count, 
-               xtitle: "Date", ytitle: "Views", title: "Cabin Popularity" %>
-<%= pie_chart CabinView.joins(:cabin)
-               .group('cabins.name')
-               .count, 
-               title: "Cabin Popularity" %>
+<!-- app/views/admin/analytics/index.html.erb -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Total Income by Day</h2>
+      <%= line_chart @income_by_day, xtitle: "Date", ytitle: "Total Income", colors: ["#00838f"] %>
+    </div>
+    <div class="col-md-6">
+      <h2>Total Income by Month</h2>
+      <%= column_chart @income_by_month, xtitle: "Month", ytitle: "Total Income", colors: ["#00838f"] %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <h2>Total Bookings per Cabin</h2>
+      <%= pie_chart @bookings_by_cabin, colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFBD33"] %>
+    </div>
+    <div class="col-md-6">
+      <h2>Total Income per Cabin</h2>
+      <%= bar_chart @income_per_cabin, colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A5", "#FFBD33", "#33FFF7"], xtitle: "Cabin", ytitle: "Income", height: "400px" %>
+    </div>
+  </div>
+</div>
