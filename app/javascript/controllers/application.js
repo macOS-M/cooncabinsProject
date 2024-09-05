@@ -1,5 +1,5 @@
 import { Application } from "@hotwired/stimulus";
-
+import "../rating";
 
 
 
@@ -7,6 +7,8 @@ const application = Application.start()
 
 application.debug = false
 window.Stimulus   = application
+
+
 
 export { application }
 
@@ -24,5 +26,16 @@ document.addEventListener('turbo:load', function() {
     scrollbar: {
       el: '.swiper-scrollbar',
     },
+  });
+});
+
+document.addEventListener("turbo:load", () => {
+  document.querySelectorAll('[data-confirm]').forEach((element) => {
+    element.addEventListener('click', function(event) {
+      const message = this.getAttribute('data-confirm');
+      if (!confirm(message)) {
+        event.preventDefault();
+      }
+    });
   });
 });

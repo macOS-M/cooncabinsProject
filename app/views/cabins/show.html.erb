@@ -1,12 +1,11 @@
-<p class="text-success"><%= notice %></p>
-
-<div class="container mt-4">
+<div class="container mt-5">
   <h1 class="mb-4"><%= @cabin.name %></h1>
 
   <div class="row">
-    <!-- Cabin Image Carousel -->
-    <% if @cabin.images.attached? %>
-      <div class="col-md-6 mb-4">
+    <!-- Left Column: Swiper and Cabin Description -->
+    <div class="col-md-6 mb-4">
+      <!-- Cabin Image Carousel -->
+      <% if @cabin.images.attached? %>
         <div class="swiper">
           <div class="swiper-wrapper">
             <% @cabin.images.each do |image| %>
@@ -21,19 +20,22 @@
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
-    <!-- Cabin Details -->
-    <div class="col-md-6">
-      <h3 class="mb-3">Average Rating: <%= @cabin.average_rating %></h3>
-      <div class="mb-4">
-        <%= link_to "Edit this cabin", edit_cabin_path(@cabin), class: 'btn btn-primary mr-2' %>
-        <%= link_to "Back to cabins", cabins_path, class: 'btn btn-secondary mr-2' %>
-        <%= button_to "Destroy this cabin", @cabin, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+      <!-- Cabin Description -->
+      <div class="mt-4">
+        <h4>Description</h4>
+        <p><%= @cabin.description %></p> <!-- Assuming there's a description attribute in your cabin model -->
       </div>
+    </div>
+
+    <!-- Right Column: Booking Form -->
+    <div class="col-md-6 mb-4">
+      <!-- Average Rating -->
+      <h3 class="mb-3">Average Rating: <%= @cabin.average_rating %>⭐</h3>
 
       <!-- Booking Form -->
+      <h5 >See Availability</h3>
       <%= form_with(model: [@cabin, @booking], local: true, id: "booking-form") do |f| %>
         <div class="form-group mb-3">
           <%= f.label :start_date, "Start Date" %>
@@ -45,7 +47,7 @@
           <%= f.date_field :end_date, class: 'form-control' %>
         </div>
 
-        <%= f.hidden_field :total_price, id: "total-price" %> 
+        <%= f.hidden_field :total_price, id: "total-price" %>
 
         <%= f.submit "Book Now", class: 'btn btn-primary' %>
       <% end %>
@@ -53,22 +55,14 @@
       <!-- Reviews Form -->
       <%= form_with model: [@cabin, @review], url: cabin_reviews_path(@cabin), local: true do |f| %>
         <div class="form-group mb-3">
-          <label>Select Rating:</label>
-          <div class="d-flex flex-wrap">
-            <%= f.radio_button :rating, 1, id: 'rating_1', class: 'form-check-input' %>
-            <%= image_tag 'scream.png', alt: 'scream (worst)', class: 'form-check-label mr-2' %>
-
-            <%= f.radio_button :rating, 2, id: 'rating_2', class: 'form-check-input' %>
-            <%= image_tag 'cry.png', alt: 'cry', class: 'form-check-label mr-2' %>
-
-            <%= f.radio_button :rating, 3, id: 'rating_3', class: 'form-check-input' %>
-            <%= image_tag 'huh.png', alt: 'Huh', class: 'form-check-label mr-2' %>
-
-            <%= f.radio_button :rating, 4, id: 'rating_4', class: 'form-check-input' %>
-            <%= image_tag 'amazing.png', alt: 'amazing', class: 'form-check-label mr-2' %>
-
-            <%= f.radio_button :rating, 5, id: 'rating_5', class: 'form-check-input' %>
-            <%= image_tag 'love.png', alt: 'love', class: 'form-check-label mr-2' %>
+          <label class="mt-4">Select Rating:</label>
+          <div class="rating-stars">
+            <% (1..5).each do |i| %>
+              <input type="radio" name="review[rating]" id="rating_<%= i %>" value="<%= i %>" class="rating-input" />
+              <label for="rating_<%= i %>" class="rating-star">
+                <i class="fa fa-star"></i>
+              </label>
+            <% end %>
           </div>
         </div>
 
@@ -79,32 +73,64 @@
 
         <%= f.submit "Submit Review", class: 'btn btn-primary' %>
       <% end %>
+    </div>
+  </div>
 
-      <!-- Reviews Section -->
-      <h3 class="mt-4">Reviews:</h3>
-      <% if @cabin.reviews.any? %>
-        <% @cabin.reviews.each do |review| %>
-          <div class="review mb-4 border p-3 rounded">
-            <div class="rating mb-2">
-              <%= image_tag review_image(review.rating), alt: "Rating: #{review.rating}", class: 'img-fluid' %>
-            </div>
-            <div class="comment mb-2">
-              <p><%= review.comment %></p>
-            </div>
-            <div class="review-meta">
-              <small class="text-muted">Reviewed by <%= review.user.email %> on <%= review.created_at.strftime("%Y-%m-%d") %></small>
-              <% if current_user == review.user %>
-                <%= button_to "Delete Review", cabin_review_path(@cabin, review), method: :delete, class: 'btn btn-danger btn-sm mt-2', data: { confirm: 'Are you sure you want to delete this review?' } %>
-              <% end %>
-            </div>
+  <!-- Reviews Section -->
+  <div>
+    <h3>Reviews:</h3>
+    <% if @cabin.reviews.any? %>
+      <% @cabin.reviews.each do |review| %>
+        <div class="review mb-4 border p-3 rounded">
+          <div class="rating mb-2">
+            <%= image_tag review_image(review.rating), alt: "Rating: #{review.rating}", class: 'img-fluid' %>
           </div>
-        <% end %>
-      <% else %>
-        <p>No reviews yet. Be the first to leave a review!</p>
+          <div class="comment mb-2">
+            <p><%= review.comment %></p>
+          </div>
+          <div class="review-meta">
+            <small class="text-muted">Reviewed by <%= review.user.email %> on <%= review.created_at.strftime("%Y-%m-%d") %></small>
+            <% if current_user == review.user %>
+              <%= button_to "Delete Review", cabin_review_path(@cabin, review), method: :delete, class: 'btn btn-danger btn-sm mt-2', data: { confirm: 'Are you sure you want to delete this review?' } %>
+            <% end %>
+          </div>
+        </div>
       <% end %>
+    <% else %>
+      <p>No reviews yet. Be the first to leave a review!</p>
+    <% end %>
+  </div>
+
+  <!-- Credit Card Modal -->
+  <div class="modal fade" id="creditCardModal" tabindex="-1" aria-labelledby="creditCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="creditCardModalLabel">Enter Credit Card Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="credit-card-form">
+            <div class="mb-3">
+              <label for="credit-card-number" class="form-label">Credit Card Number</label>
+              <input type="text" class="form-control" id="credit-card-number" required>
+            </div>
+            <div class="mb-3">
+              <label for="expiration-date" class="form-label">Expiration Date</label>
+              <input type="text" class="form-control" id="expiration-date" required>
+            </div>
+            <div class="mb-3">
+              <label for="cvv" class="form-label">CVV</label>
+              <input type="text" class="form-control" id="cvv" required>
+            </div>
+            <button type="button" class="btn btn-primary" id="confirm-payment">Confirm Payment</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
 <script>
 document.addEventListener("turbo:load", function() {
@@ -168,3 +194,28 @@ document.addEventListener("turbo:load", function() {
   }
 });
 </script>
+
+<style>
+/* Default star styling */
+.rating-stars {
+  display: flex;
+  direction: row;
+}
+
+.rating-star {
+  font-size: 2rem;
+  color: grey; /* Default color for unselected stars */
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.rating-input:checked ~ .rating-star {
+  color: gold; /* Color for selected stars */
+}
+
+/* Hide radio buttons */
+.rating-input {
+  display: none;
+}
+
+</style>
