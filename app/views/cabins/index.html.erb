@@ -19,12 +19,10 @@
         <div class="col-md-6">
           <% if cabin.images.attached? %>
           <div class="swiper">
-          <!-- Additional required wrapper -->
          <div class="swiper-wrapper">
             <% cabin.images.each do |image| %>
               <%= image_tag image, class: "swiper-slide img-fluid mx-auto d-block rounded img-test"  %>
             <% end %>
-              <!-- Slider main container -->
 
 
 

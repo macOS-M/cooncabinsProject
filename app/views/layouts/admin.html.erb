@@ -14,20 +14,23 @@
     <%= csp_meta_tag %>
     <%= turbo_include_tags %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %> <!-- Import map should be included first -->
-    <%= javascript_include_tag 'application', type: 'module' %> <!-- Include module script -->
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'application', type: 'module' %>
     <%= javascript_include_tag '//www.gstatic.com/charts/loader.js' %>
     <%= javascript_include_tag 'chartkick' %>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
   </head>
 
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <!-- Main Navigation -->
     <%= render 'layouts/headerAdmin' %>
-
     <main>
       <div class="container pt-4">
         <%= yield %>

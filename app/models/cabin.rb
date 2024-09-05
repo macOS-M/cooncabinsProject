@@ -1,8 +1,8 @@
 class Cabin < ApplicationRecord
-    has_many_attached :images
-    has_many :reviews
-    has_many :cabin_views
-    has_many :bookings
+    has_many_attached :images, dependent :destroy
+    has_many :reviews, dependent: :destroy
+    has_many :cabin_views, dependent: :destroy
+    has_many :bookings, dependent: :destroy
     after_save :update_available_dates
     
     def average_rating
@@ -19,7 +19,6 @@ class Cabin < ApplicationRecord
           all_dates.concat((start_date..end_date).to_a)
         end
     
-        # Define the range of dates you want to consider (e.g., the next 6 months)
         start_range = Date.today
         end_range = start_range + 6.months
     
