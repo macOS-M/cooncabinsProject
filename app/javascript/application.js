@@ -7,3 +7,4 @@ import "@rails/actiontext"
 
 import "./rating"
 import "./card"
+import "./booking"
