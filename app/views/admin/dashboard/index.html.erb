@@ -9,12 +9,10 @@ Quick links
                .count, 
                title: "Cabin Popularity" %>
 
-               <!-- app/views/admin/dashboard/index.html.erb -->
 <h2>Income Over Time</h2>
 
 <%= line_chart @income_by_day, xtitle: "Date", ytitle: "Total Income", colors: ["#00838f"] %>
 
-<!-- Optional: Add another chart for monthly income -->
 <h3>Monthly Income</h3>
 <%= column_chart @income_by_month, xtitle: "Month", ytitle: "Total Income", colors: ["#00838f"] %>
 

@@ -2,12 +2,10 @@ class CabinsController < ApplicationController
   before_action :set_cabin, only: %i[show edit update destroy]
   before_action :authorize_admin!, only: %i[edit update destroy]
 
-  # GET /cabins or /cabins.json
   def index
     @cabins = Cabin.all
   end
 
-  # GET /cabins/1 or /cabins/1.json
   def show
     @cabin = Cabin.find(params[:id])
     @review = Review.new
@@ -17,16 +15,13 @@ class CabinsController < ApplicationController
     @booked_dates = booked_dates(@cabin.bookings)
   end
 
-  # GET /cabins/new
   def new
     @cabin = Cabin.new
   end
 
-  # GET /cabins/1/edit
   def edit
   end
 
-  # POST /cabins or /cabins.json
   def create
     @cabin = Cabin.new(cabin_params)
 
@@ -41,7 +36,6 @@ class CabinsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /cabins/1 or /cabins/1.json
   def update
     respond_to do |format|
       if @cabin.update(cabin_params)
@@ -54,7 +48,6 @@ class CabinsController < ApplicationController
     end
   end
 
-  # DELETE /cabins/1 or /cabins/1.json
   def destroy
     @cabin.destroy!
 
@@ -86,12 +79,10 @@ class CabinsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_cabin
     @cabin = Cabin.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def cabin_params
     params.require(:cabin).permit(:name, :description, :price, images: [])
   end
@@ -123,14 +114,11 @@ class CabinsController < ApplicationController
   
 
   def calculate_available_dates(bookings_dates)
-    # Define the range you want to check for availability (e.g., next 6 months)
     start_date = Date.today
     end_date = start_date + 6.months
   
-    # Generate all dates in the defined range
     all_dates = (start_date..end_date).to_a.map { |date| date.strftime('%Y-%m-%d') }
   
-    # Filter out booked dates
     available_dates = all_dates - bookings_dates
   
     available_dates

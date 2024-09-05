@@ -1,5 +1,3 @@
-# app/controllers/reviews_controller.rb
-
 class ReviewsController < ApplicationController
     before_action :set_cabin
 

@@ -1,14 +1,11 @@
-# app/controllers/admin/users_controller.rb
 module Admin
     class UsersController < ApplicationController
       before_action :set_user, only: [:show, :edit, :update, :destroy]
   
       def show
-        # Display the user details
       end
   
       def edit
-        # Display the form for editing the user
       end
       def new
         @user = User.new
