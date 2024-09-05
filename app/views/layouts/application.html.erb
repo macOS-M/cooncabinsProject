@@ -19,6 +19,8 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    
     <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -31,8 +33,17 @@
   <body>
 
     <%= render 'layouts/header'%>
-        <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+  
     <%= yield %>
     <%= render 'layouts/footer'%>
   </body>

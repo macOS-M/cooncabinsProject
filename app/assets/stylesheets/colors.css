@@ -38,7 +38,16 @@ body {
     font-style: normal;
     
   }
-
+  .alert {
+    position: absolute; /* or absolute, depending on your layout */
+    top: 10px; /* Adjust top position as needed */
+    
+    z-index: 1050; /* Higher than the nav's z-index */
+    width: 100%; /* Adjust width if needed */
+    max-width: 90%; /* Ensure it doesn’t overflow the viewport */
+    
+  }
+  
  
 
   
