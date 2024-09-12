@@ -67,9 +67,9 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
         <a href="#" class="list-group-item list-group-item-action py-2 ripple"
           ><i class="fas fa-building fa-fw me-3"></i><span>Partners</span></a
         >
-        <a href="#" class="list-group-item list-group-item-action py-2 ripple"
-          ><i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a
-        >
+        <%= link_to admin_dashboard_calendar_path, class: "list-group-item list-group-item-action py-2 ripple" do%>
+        <i class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span>
+        <%end%>
         <%= link_to admin_dashboard_users_path, class: "list-group-item list-group-item-action py-2 ripple" do %>
         <i class="fas fa-users fa-fw me-3"></i><span>Users</span>
         <% end %>

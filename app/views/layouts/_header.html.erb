@@ -60,13 +60,14 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
         <% end %>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-bell pe-2"></i>Alerts</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link mx-2" href="#!"><i class="fas fa-heart pe-2"></i>Trips</a>
-        </li>
+        
+
         <% if user_signed_in? %>
+        <li class="nav-item">
+        <%= link_to user_bookings_bookings_path, class: "nav-link mx-2" do %>
+         <i class="fas fa-calendar pe-2"></i><span>Bookings</span>
+        <%end%>
+        </li>
         <li class="nav-item">
         <%= link_to destroy_user_session_path, method: :delete, class: "nav-link" do %>
         
@@ -74,6 +75,7 @@ l43 -44 -34 -62 c-66 -121 -122 -342 -109 -428 6 -37 24 -54 24 -22 0 29 43
           <i class="fa-solid fa-sign-out-alt pe-2"></i>Log Out
           <% end %>
         </li>
+
 
         <%else%>
         <li class="nav-item">

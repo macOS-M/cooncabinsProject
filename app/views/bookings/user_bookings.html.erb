@@ -1,0 +1,88 @@
+<h1 class="my-4">Your Bookings</h1>
+
+<!-- Improved table styling with Bootstrap -->
+<table class="table table-bordered table-hover table-responsive">
+  <thead class="table-light">
+    <tr>
+      <th scope="col">Cabin</th>
+      <th scope="col">Start Date</th>
+      <th scope="col">End Date</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.cabin.name %></td>
+        <td><%= booking.start_date %></td>
+        <td><%= booking.end_date %></td>
+        <td><%= number_to_currency(booking.total_price) %></td>
+        <td>
+          <!-- Button group for view and delete actions -->
+          <div class="btn-group" role="group">
+          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#bookingModal" data-id="<%= booking.id %>">
+            View
+          </button>
+            <% if booking.end_date > Date.today %>
+              <%= button_to 'Delete', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Bootstrap Pagination Controls -->
+<nav aria-label="Bookings pagination">
+  <ul class="pagination justify-content-center">
+    <% if params[:page].to_i > 1 %>
+      <li class="page-item">
+        <%= link_to 'Previous', user_bookings_bookings_path(page: params[:page].to_i - 1), class: 'page-link' %>
+      </li>
+    <% else %>
+      <li class="page-item disabled">
+        <a class="page-link">Previous</a>
+      </li>
+    <% end %>
+
+    <% (1..@total_pages).each do |page| %>
+      <li class="page-item <%= 'active' if page == params[:page].to_i %>">
+        <%= link_to page, user_bookings_bookings_path(page: page), class: 'page-link' %>
+      </li>
+    <% end %>
+
+    <% if params[:page].to_i < @total_pages %>
+      <li class="page-item">
+        <%= link_to 'Next', user_bookings_bookings_path(page: params[:page].to_i + 1), class: 'page-link' %>
+      </li>
+    <% else %>
+      <li class="page-item disabled">
+        <a class="page-link">Next</a>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
+
+<!-- Modal Structure -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Booking Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Cabin Name:</strong> <span id="modalCabinName"></span></p>
+        <p><strong>Start Date:</strong> <span id="modalStartDate"></span></p>
+        <p><strong>End Date:</strong> <span id="modalEndDate"></span></p>
+        <p><strong>Total Price:</strong> <span id="modalTotalPrice"></span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

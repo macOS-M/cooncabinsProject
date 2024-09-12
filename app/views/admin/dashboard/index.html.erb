@@ -1,5 +1,7 @@
+<!-- app/views/admin/dashboard/index.html.erb -->
 <h1>Admin Dashboard</h1>
 
+<!-- Metrics Section -->
 <div class="dashboard-metrics">
   <div class="metric-box">
     <h2>Total Sales Today</h2>
@@ -27,6 +29,7 @@
   </div>
 </div>
 
+<!-- Recent Bookings Section -->
 <h2>Recent Bookings</h2>
 <table class="table table-bordered">
   <thead>
@@ -50,3 +53,16 @@
     <% end %>
   </tbody>
 </table>
+
+<!-- Quick Links Section -->
+<div class="quick-links mt-5">
+  <h2>Quick Links</h2>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <%= link_to 'Create New Cabin', new_cabin_path, class: 'btn btn-primary w-100' %>
+    </div>
+    <div class="col-md-4 mb-3">
+      <%= link_to 'Manage Users', admin_dashboard_users_path, class: 'btn btn-warning w-100' %>
+    </div>
+  </div>
+</div>

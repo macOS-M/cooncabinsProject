@@ -1,8 +1,46 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Cabins</h1>
+<!-- Filter Form -->
+<%= form_with url: cabins_path, method: :get, local: true, class: "mb-5 p-4 bg-light rounded shadow-sm" do |form| %>
+  <div class="row">
+    <!-- Rating Filter -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= form.label :min_rating, "Min Rating", class: "form-label" %>
+        <%= form.number_field :min_rating, value: params[:min_rating], step: 0.1, min: 0, max: 5, class: "form-control", placeholder: "Min: 0" %>
+      </div>
+    </div>
 
-<%= link_to "New cabin", new_cabin_path %>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= form.label :max_rating, "Max Rating", class: "form-label" %>
+        <%= form.number_field :max_rating, value: params[:max_rating], step: 0.1, min: 0, max: 5, class: "form-control", placeholder: "Max: 5" %>
+      </div>
+    </div>
+
+    <!-- Price Filter -->
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= form.label :min_price, "Min Price", class: "form-label" %>
+        <%= form.number_field :min_price, value: params[:min_price], step: 0.01, min: 0, class: "form-control", placeholder: "Min Price" %>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= form.label :max_price, "Max Price", class: "form-label" %>
+        <%= form.number_field :max_price, value: params[:max_price], step: 0.01, min: 0, class: "form-control", placeholder: "Max Price" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="row mt-3">
+    <div class="col-md-12 text-center">
+      <%= form.submit "Filter Cabins", class: "btn btn-primary px-5 py-2" %>
+    </div>
+  </div>
+<% end %>
 
 <section class="diagonal section-bg1">
   <div class="container diagonal-content">
@@ -26,14 +64,9 @@
                   </div>
                 <% end %>
               </div>
-              <!-- If we need pagination -->
               <div class="swiper-pagination"></div>
-
-              <!-- If we need navigation buttons -->
               <div class="swiper-button-prev"></div>
               <div class="swiper-button-next"></div>
-
-              <!-- If we need scrollbar -->
               <div class="swiper-scrollbar"></div>
             </div>
           <% else %>
@@ -44,3 +77,6 @@
     <% end %>
   </div>
 </section>
+
+
+

@@ -1,13 +1,27 @@
 class CabinsController < ApplicationController
-  before_action :set_cabin, only: %i[show edit update destroy]
-  before_action :authorize_admin!, only: %i[edit update destroy]
-
+  before_action :set_cabin, only: %i[show edit update destroy create_review]
+  before_action :require_admin, only: [:edit, :update, :destroy]
   def index
-    @cabins = Cabin.all
+    @cabins = Cabin.left_joins(:reviews)
+      .select("cabins.*, COALESCE(AVG(reviews.rating), 0) AS average_rating")
+      .group("cabins.id")
+
+    if params[:min_rating].present?
+      @cabins = @cabins.having("AVG(reviews.rating) >= ?", params[:min_rating])
+    end
+    if params[:max_rating].present?
+      @cabins = @cabins.having("AVG(reviews.rating) <= ?", params[:max_rating])
+    end
+
+    if params[:min_price].present?
+      @cabins = @cabins.where("cabins.price >= ?", params[:min_price])
+    end
+    if params[:max_price].present?
+      @cabins = @cabins.where("cabins.price <= ?", params[:max_price])
+    end
   end
 
   def show
-    @cabin = Cabin.find(params[:id])
     @review = Review.new
     @booking = @cabin.bookings.new
     CabinView.create(cabin: @cabin, user: current_user)
@@ -39,7 +53,7 @@ class CabinsController < ApplicationController
   def update
     respond_to do |format|
       if @cabin.update(cabin_params)
-        format.html { redirect_to cabin_url(@cabin), notice: "Cabin was successfully updated." }
+        format.html { redirect_to @cabin, notice: "Cabin was successfully updated." }
         format.json { render :show, status: :ok, location: @cabin }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,7 +63,7 @@ class CabinsController < ApplicationController
   end
 
   def destroy
-    @cabin.destroy!
+    @cabin.destroy
 
     respond_to do |format|
       format.html { redirect_to cabins_url, notice: "Cabin was successfully destroyed." }
@@ -58,8 +72,6 @@ class CabinsController < ApplicationController
   end
 
   def create_review
-    @cabin = Cabin.find_by(id: params[:id])
-    
     if @cabin.nil?
       flash[:alert] = "Cabin not found."
       redirect_to cabins_path
@@ -91,10 +103,10 @@ class CabinsController < ApplicationController
     params.require(:review).permit(:rating, :comment)
   end
 
-  def authorize_admin!
+  def require_admin
     unless current_user.admin?
       flash[:alert] = "You are not authorized to perform this action."
-      redirect_to cabins_path
+      redirect_to cabins_path  
     end
   end
 
@@ -112,7 +124,6 @@ class CabinsController < ApplicationController
     (start_date..end_date).to_a.map { |date| date.strftime('%Y-%m-%d') }
   end
   
-
   def calculate_available_dates(bookings_dates)
     start_date = Date.today
     end_date = start_date + 6.months

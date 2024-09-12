@@ -1,5 +1,6 @@
 <!-- app/views/admin/analytics/index.html.erb -->
 <div class="container">
+  <!-- First Row: Income by Day and Month -->
   <div class="row">
     <div class="col-md-6">
       <h2>Total Income by Day</h2>
@@ -11,6 +12,7 @@
     </div>
   </div>
 
+  <!-- Second Row: Bookings and Income by Cabin -->
   <div class="row mt-5">
     <div class="col-md-6">
       <h2>Total Bookings per Cabin</h2>
@@ -21,4 +23,30 @@
       <%= bar_chart @income_per_cabin, colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A5", "#FFBD33", "#33FFF7"], xtitle: "Cabin", ytitle: "Income", height: "400px" %>
     </div>
   </div>
-</div>
+
+  <!-- Third Row: Average Rating and Total Reviews per Cabin -->
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <h2>Average Rating per Cabin</h2>
+      <%= bar_chart @average_rating_per_cabin, colors: ["#42A5F5"], xtitle: "Cabin", ytitle: "Average Rating", height: "400px" %>
+    </div>
+    <div class="col-md-6">
+      <h2>Total Reviews per Cabin</h2>
+      <%= pie_chart @total_reviews_per_cabin, colors: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"] %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md">
+      <h2>Cabin popularity</h2>
+      <%= pie_chart @views_per_cabin, xtitle: "Cabin", ytitle: "Views", colors: ["#FF5733", "#33FF57", "#3357FF", "#FF33A6", "#FFBD33"] %>
+    </div>
+    <div class="col-md-6">
+      <h2>Cabin interaction per day</h2>
+      <%= line_chart @cabin_views_per_day, xtitle: "Date", ytitle: "Total views", colors: ["#00838f", "#FF5733","33FF57"] %>
+    </div>
+  </div>
+  </div>
+
+
+

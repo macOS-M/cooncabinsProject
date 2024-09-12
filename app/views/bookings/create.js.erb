@@ -1,0 +1,7 @@
+<% if @booking.persisted? %>
+  alert('Booking was successfully created.');
+  // Optionally, you can replace part of the page with booking details:
+  // $("#booking-details").html("<%= escape_javascript(render 'bookings/booking_details', booking: @booking) %>");
+<% else %>
+  alert('Booking could not be created: <%= @booking.errors.full_messages.join(', ') %>');
+<% end %>

@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/interaction": "^6.1.15",
+    "axios": "^1.7.7",
     "chart.js": "^4.4.4",
     "chartkick": "^5.0.1",
     "flatpickr": "^4.6.13",

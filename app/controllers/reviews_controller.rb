@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to @cabin, notice: 'Review was successfully created.'
     else
-      redirect_to @cabin, alert: 'Failed to create review.'
+      redirect_to @cabin, alert: 'Please add rating and comment.'
     end
   end
 

@@ -1,0 +1,29 @@
+.landing-section {
+    position: relative;
+    background-color: #fff;
+  }
+  
+  .wave-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+  }
+  
+  .wave svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 320px;
+  }
+  
+  .wave svg path {
+    fill: url(#wave-gradient); /* Gradient applied to the wave */
+  }
+  
+  .wave svg text {
+    fill: white; /* Text color inside the wave */
+    font-size: 2rem;
+  }
+  
+  

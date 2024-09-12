@@ -1,0 +1,32 @@
+<h1>Admin Booking Calendar</h1>
+
+<div class="form-group">
+  <label for="cabin_select">Select Cabin</label>
+  <select id="cabin_select" class="form-control">
+    <option value="">All Cabins</option>
+    <% @cabins.each do |cabin| %>
+      <option value="<%= cabin.id %>"><%= cabin.name %></option>
+    <% end %>
+  </select>
+</div>
+
+<div id="calendar"></div>
+
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventModalLabel">Booking Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="eventDetails"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="cancelBookingButton">Cancel Booking</button>
+      </div>
+    </div>
+  </div>
+</div>
+

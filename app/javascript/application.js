@@ -6,5 +6,6 @@ import "trix"
 import "@rails/actiontext"
 
 import "./rating"
-import "./card"
-import "./booking"
+import "./admin_calendar"
+import "./modal"
+import "./userBookings"

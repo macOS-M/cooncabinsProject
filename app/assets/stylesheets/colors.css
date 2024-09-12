@@ -40,14 +40,82 @@ body {
   }
   .alert {
     position: absolute; /* or absolute, depending on your layout */
-    top: 10px; /* Adjust top position as needed */
+    top: 30px; /* Adjust top position as needed */
     
     z-index: 1050; /* Higher than the nav's z-index */
-    width: 100%; /* Adjust width if needed */
-    max-width: 90%; /* Ensure it doesn’t overflow the viewport */
     
   }
   
  
+  
+
+  .text-image {
+    position: relative;
+  }
+  
+  .text-image h2 {
+    font-weight: 700;
+  }
+  
+  .text-image p {
+    font-size: 1.25rem;
+    color: #555;
+  }
+  
+  .text-image .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .text-image .bg-light {
+    background-color: #f8f9fa;
+  }
+  
+  .text-image .rounded {
+    border-radius: 0.5rem;
+  }
 
   
+
+
+
+
+
+  .text-image .image-wrapper {
+    position: relative;
+  }
+  
+  .text-image .base-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    transform : rotate(5deg); /* Adjust rotation as needed */
+  }
+  
+  .text-image .top-image {
+    position: absolute;
+    top: 0%; /* Adjust to move the image down */
+    left: 95%; /* Adjust to move the image right */
+    transform: rotate(-5deg); /* Adjust rotation as needed */
+    max-width: 100%; /* Adjust size to only cover a corner */
+    height: auto;
+    z-index: 1; /* Ensure this image is above the base image */
+  }
+  
+  
+  .coonbg {
+    background-image: url('tile_background.png'); /* Path to your large image */
+    background-size: cover; /* Make sure the image covers the entire background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-attachment: fixed; /* Optional: Fix the image in place as you scroll */
+    height: 100vh; /* Adjust height if needed */
+  }
+  .coonbg-light{
+    background-image: url('tile_background_light.png'); /* Path to your large image */
+    background-size: cover; /* Make sure the image covers the entire background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-attachment: fixed; /* Optional: Fix the image in place as you scroll */
+    height: 100vh; /* Adjust height if needed */
+  }
