@@ -27,7 +27,7 @@
       </div>
     </section>
     
-    <section class="image-text">
+    <section class="text-image">
       <div class="container">
         <div class="row">
           <div class="col-md-6 ps-5 text-center">
@@ -47,19 +47,156 @@
       </div>
     </section>
     
-    <section class="text-image">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h2>Get a Well Deserved Rest</h2>
-            <p>Unwind and recharge in our serene accommodations. Our cozy rooms and relaxing atmosphere ensure you get the restful sleep you deserve after a long day of travel or work.</p>
-          </div>
-          <div class="col-md-6">
-            <%= image_tag("rest.png")%>
-          </div>
+<section class="text-image py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2>Get a Well Deserved Rest</h2>
+        <p class="lead">Unwind and recharge in our serene accommodations. Our cozy rooms and relaxing atmosphere ensure you get the restful sleep you deserve after a long day of travel or work.</p>
+      </div>
+      <div class="col-md-6 mr-5 text-center">
+        <%= image_tag("rest.png", class: "img-fluid rounded") %>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<section>
+  <div class='container'>
+  
+  </div>
+</section>
+
+<section class="text-image py-5 bg-light">
+  <div class="container">
+  <h2 class="display-4 mb-5 mt-5 pb-5 pt-5 text-center bg-light"> What we offer </h2>
+    <div class="row align-items-center">
+     <h2 class="display-4 mb-3">The Perfect Honeymoon Site</h2>
+        <p class="lead">Experience romance and relaxation in our luxurious honeymoon suites. With breathtaking views and exclusive amenities, our hotel provides the perfect setting for a memorable romantic getaway.</p>
+      <div class="col-md-6">
+       <%= image_tag("romantic_dinner.jpg", class: "img-fluid rounded") %>
+      </div>
+      <div class="col-md-6 text-center">
+        <%= image_tag("walk.jpg", class: "img-fluid rounded mb-2") %>
+        <%= image_tag("night.jpg", class: "img-fluid rounded mb-2") %>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="text-image py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+       <%= image_tag("personaldinner.jpg", class: "img-fluid rounded") %>
+        
+      </div>
+      <div class="col-md-6 text-center">
+       <h2 class="display-4 mb-3">Enjoy Our Fine Cuisine</h2>
+        <p class="lead">Savor exquisite dishes crafted by our expert chefs. From gourmet dinners to delightful breakfasts, our diverse menu ensures a culinary experience you won't forget.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="text-image py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="display-4 mb-3">Party Like Never Before</h2>
+        <p class="lead">Dance the night away at our exclusive events and parties. With vibrant entertainment and a lively atmosphere, our hotel is the perfect place to celebrate and have fun.</p>
+      </div>
+      <div class="col-md-6 text-center">
+        <%= image_tag("party.jpg", class: "img-fluid rounded") %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="text-image py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <h2 class="display-4 mb-3">Exciting Adventures</h2>
+        <p class="lead">Explore thrilling activities and adventures designed to excite and challenge. From outdoor excursions to unique experiences, we offer something for every adventurer.</p>
+      </div>
+      <div class="col-md-6 position-relative">
+        <div class="image-wrapper">
+          <%= image_tag("diving.jpg", class: "img-fluid rounded base-image") %>
+          <%= image_tag("waterjet.jpg", class: "img-fluid rounded top-image") %>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="text-image py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="display-4 mb-3">Relax with Our 5 Star Massagists</h2>
+        <p class="lead">Indulge in the ultimate relaxation experience with our professional massage therapists. Our soothing treatments and serene environment will leave you feeling rejuvenated.</p>
+      </div>
+      <div class="col-md-6 text-center">
+        <%= image_tag("massages.jpg", class: "img-fluid rounded") %>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Booking Section -->
+<section id="booking" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="mb-4">Ready to Book Your Stay?</h2>
+    <p class="mb-4">Explore our cozy cabins and start your adventure with us today!</p>
+    <a href="<%= cabins_path %>" class="btn btn-primary btn-lg">Book Now</a>
+    <div class="mt-4">
+      <p class="text-muted">10% of all bookings will be donated to a foundation that saves raccoons.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Us Section -->
+<section id="contact" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Contact Us</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Get in Touch</h4>
+        <p>If you have any questions or need assistance, feel free to reach out to us. We're here to help!</p>
+        <ul class="list-unstyled">
+          <li><strong>Email:</strong> support@example.com</li>
+          <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+          <li><strong>Address:</strong> 123 Main Street, City, State, ZIP</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h4>Contact Form</h4>
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Your Name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Your Email">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
   </div>
 <style>
 
@@ -121,5 +258,6 @@ body {
 .image-text .col-md-6:nth-child(odd) {
   order: 2;
 }
+
 </style>
 

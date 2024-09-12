@@ -90,3 +90,10 @@ body {
   margin: 0 auto;
   max-width: 80%;
 }
+
+
+/* Calendar   */
+
+@import "@fullcalendar/core/main.css";
+@import "@fullcalendar/daygrid/main.css";
+

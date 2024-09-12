@@ -3,17 +3,29 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'dashboard#index'
     get 'dashboard/analytics', to: 'dashboard#analytics'
     get 'dashboard/users', to: 'dashboard#users'
+    get 'dashboard/calendar', to: 'dashboard#calendar'
     resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
   end
+
+
+  resources :bookings, only: [:create, :update, :destroy, :index, :show] do
+    post 'confirm_payment', on: :member
+    collection do
+      get 'calendar_events'
+      get 'calendar' 
+      get 'user_bookings'
+    end
+  end
   
+  
+ 
   resources :cabins do
     post 'create_review', on: :member
-    resources :reviews, only: [:create, :destroy] # Add :destroy to allow review deletion
+    resources :reviews, only: [:create, :destroy]
+    resources :bookings, only: [:create] # Use nested bookings only for create here
   end
   
-  resources :cabins do
-    resources :bookings, only: [:create]
-  end
+
   
   devise_for :users
   get 'home/index'

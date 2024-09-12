@@ -1,5 +1,8 @@
 import { Application } from "@hotwired/stimulus";
 import "../rating";
+import "../admin_calendar";
+
+
 
 
 
@@ -39,3 +42,4 @@ document.addEventListener("turbo:load", () => {
     });
   });
 });
+
