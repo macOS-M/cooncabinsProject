@@ -18,6 +18,7 @@ class ReviewsController < ApplicationController
     @review.destroy
     redirect_to @cabin, notice: 'Review was successfully deleted.'
   end
+  
 
   private
 
@@ -34,7 +35,8 @@ class ReviewsController < ApplicationController
   end
 
   def authorize_user!
-    unless @review.user == current_user || current_user.admin?
+    if @review.user == current_user || current_user.admin?
+    else
       flash[:alert] = "You are not authorized to delete this review."
       redirect_to @cabin
     end

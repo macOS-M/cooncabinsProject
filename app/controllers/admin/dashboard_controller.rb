@@ -37,9 +37,6 @@ class Admin::DashboardController < ApplicationController
     @income_per_cabin = Booking.joins(:cabin).group('cabins.name').sum('bookings.total_price')
     @views_per_cabin = CabinView.joins(:cabin).group('cabins.name').count('cabin_views.id')
     @cabin_views_per_day = CabinView.joins(:cabin).group('cabins.name').group_by_day(:created_at, format: "%b %d, %Y").count
-
-    
-    
     @average_rating_per_cabin = Review.joins(:cabin).group('cabins.name').average('reviews.rating')
     @total_reviews_per_cabin = Review.joins(:cabin).group('cabins.name').count('reviews.id')
     @cabin_availability_trends = Cabin.group_by_month(:created_at, format: "%B %Y").count
