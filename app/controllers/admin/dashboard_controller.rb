@@ -47,6 +47,13 @@ class Admin::DashboardController < ApplicationController
   
   def users
     @users = User.all
+    per_page = 10
+  
+    page = params.fetch(:page, 1).to_i
+    
+    @users = User.offset((page - 1) * per_page).limit(per_page)
+    
+    @total_pages = (User.count / per_page.to_f).ceil
   end
   def calendar
     @cabins = Cabin.all 

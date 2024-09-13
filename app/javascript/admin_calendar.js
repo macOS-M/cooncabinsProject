@@ -6,9 +6,9 @@ import axios from "https://cdn.skypack.dev/axios";
 document.addEventListener("turbo:load", function() {
   const calendarEl = document.getElementById("calendar");
   const cabinSelect = document.getElementById("cabin_select");
-  let selectedEvent = null; // To store the selected event
+  let selectedEvent = null; 
 
-  if (calendarEl) {  // Ensure that the calendar element exists on the page
+  if (calendarEl) {  
     let calendar = new Calendar(calendarEl, {
       plugins: [dayGridPlugin, interactionPlugin],
       initialView: "dayGridMonth",
@@ -27,13 +27,12 @@ document.addEventListener("turbo:load", function() {
       },
       eventClick: function(info) {
         info.jsEvent.preventDefault();
-        selectedEvent = info.event; // Store the event to reference later
+        selectedEvent = info.event; 
 
-        // Populate modal with event details
+        
         const details = `User: ${selectedEvent.title}<br>Start: ${selectedEvent.start}<br>End: ${selectedEvent.end}`;
         document.getElementById('eventDetails').innerHTML = details;
 
-        // Show the modal
         const eventModal = new bootstrap.Modal(document.getElementById('eventModal'), {});
         eventModal.show();
       }
@@ -47,13 +46,11 @@ document.addEventListener("turbo:load", function() {
       });
     }
 
-    // Handle booking cancellation
     const cancelBookingButton = document.getElementById('cancelBookingButton');
     cancelBookingButton.addEventListener('click', function() {
       if (selectedEvent) {
         const confirmed = confirm(`Are you sure you want to cancel this booking for ${selectedEvent.title}?`);
         if (confirmed) {
-          // Send delete request to the server to cancel the booking
           axios.delete(`/bookings/${selectedEvent.id}`, {
   headers: {
     'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -61,7 +58,7 @@ document.addEventListener("turbo:load", function() {
 })
 .then(response => {
   if (response.status === 200) {
-    selectedEvent.remove();  // Remove event from calendar
+    selectedEvent.remove();  
     alert('Booking cancelled successfully.');
   }
 })
@@ -70,7 +67,7 @@ document.addEventListener("turbo:load", function() {
   alert('Failed to cancel the booking.');
 });
 
-          // Hide the modal after the action
+          
           const eventModal = bootstrap.Modal.getInstance(document.getElementById('eventModal'));
           eventModal.hide();
         }

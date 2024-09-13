@@ -1,10 +1,30 @@
 module Admin
     class UsersController < ApplicationController
+       layout 'admin'
       before_action :set_user, only: [:show, :edit, :update, :destroy]
   
       def show
       end
-  
+      def index
+        per_page = 10
+        page = params.fetch(:page, 1).to_i
+        @users = User.all
+    
+        # Sorting
+        @users = @users.where(id: params[:id]) if params[:id].present?
+        @users = @users.where('email LIKE ?', "%#{params[:email]}%") if params[:email].present?
+        @users = @users.where(admin: ActiveModel::Type::Boolean.new.cast(params[:admin])) if params[:admin].present?
+    
+        
+        if params[:sort].present?
+          direction = params[:direction] == "desc" ? "desc" : "asc"
+          @users = @users.order("#{params[:sort]} #{direction}")
+        end
+    
+        # Pagination
+        @total_pages = (@users.count / per_page.to_f).ceil
+        @users = @users.offset((page - 1) * per_page).limit(per_page)
+      end
       def edit
       end
       def new

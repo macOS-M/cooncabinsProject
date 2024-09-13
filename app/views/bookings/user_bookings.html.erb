@@ -1,6 +1,7 @@
-<h1 class="my-4">Your Bookings</h1>
 
-<!-- Improved table styling with Bootstrap -->
+
+<div class="container">
+<h1 class="my-4">Your Bookings</h1>
 <table class="table table-bordered table-hover table-responsive">
   <thead class="table-light">
     <tr>
@@ -21,11 +22,11 @@
         <td>
           <!-- Button group for view and delete actions -->
           <div class="btn-group" role="group">
-          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#bookingModal" data-id="<%= booking.id %>">
+          <button type="button" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#bookingModal" data-id="<%= booking.id %>">
             View
           </button>
             <% if booking.end_date > Date.today %>
-              <%= button_to 'Delete', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+              <%= button_to 'Cancel', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger ms-2' %>
             <% end %>
           </div>
         </td>
@@ -85,4 +86,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
