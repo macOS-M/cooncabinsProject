@@ -27,6 +27,11 @@ class CabinsController < ApplicationController
     CabinView.create(cabin: @cabin, user: current_user)
     @available_dates = calculate_available_dates(@cabin.bookings.pluck(:start_date, :end_date))
     @booked_dates = booked_dates(@cabin.bookings)
+    @cabin = Cabin.find(params[:id])
+    @reviews_per_page = 5
+    @page = (params[:page] || 1).to_i
+    @total_reviews = @cabin.reviews.count
+    @reviews = @cabin.reviews.order(created_at: :desc).offset((@page - 1) * @reviews_per_page).limit(@reviews_per_page)
   end
 
   def new

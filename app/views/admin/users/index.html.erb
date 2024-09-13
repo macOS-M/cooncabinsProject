@@ -20,7 +20,7 @@
         <%= select_tag :admin, options_for_select([['All', ''], ['Yes', 'true'], ['No', 'false']], selected: params[:admin]), class: 'form-control' %>
       </div>
       <div class="col-md-2">
-        <%= label_tag :filter, '&nbsp;' %>
+        <%= label_tag :filter %>
         <%= submit_tag 'Filter', class: 'btn btn-primary form-control' %>
       </div>
     </div>
