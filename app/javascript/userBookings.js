@@ -1,10 +1,7 @@
 document.addEventListener("turbo:load", function() {
     const modalEl = document.getElementById('bookingModal');
     
-    if (!modalEl) {
-      console.error('Modal element not found');
-      return;
-    }
+   
 
     
 
