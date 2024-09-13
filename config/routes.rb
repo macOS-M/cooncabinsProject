@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     get 'dashboard/analytics', to: 'dashboard#analytics'
     get 'dashboard/users', to: 'dashboard#users'
     get 'dashboard/calendar', to: 'dashboard#calendar'
-    resources :users, only: [:index, :new, :create, :edit, :update, :destroy]
+    
+    resources :users, only: [:index, :show,:new, :create, :edit, :update, :destroy]
   end
 
 
